@@ -26,3 +26,6 @@
 *.mtc
 *.mtc0
 *.swp
+*.bcf
+*.run.xml
+.idea

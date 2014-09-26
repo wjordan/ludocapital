@@ -45,7 +45,7 @@
 \newcommand{\dedications}[1]{\newcommand\Dedications{#1}}
 \newcommand{\acknowledgments}[1]{\newcommand\Acknowledgments{#1}}
 \newcommand{\curriculumvitae}[1]{\newcommand\Curriculumvitae{#1}}
-\newcommand{\thesisabstract}[1]{\newcommand\Thesisbstract{#1}}
+\newcommand{\thesisabstract}[1]{\newcommand\Thesisabstract{#1}}
 
 \newcommand{\thesistitlepage}
 {
@@ -146,8 +146,11 @@
 	\begin{center}
 		\textbf{\Large ACKNOWLEDGMENTS}
 	\end{center}
-	\parskip 12pt
-	\parindent 0pt
+  \setlength{\parindent}{0.5in} 
+  \setlength{\parskip}{0pt}
+  %\parskip 12pt
+	%\parindent 0pt
+  \doublespacing
 	\Acknowledgments
 	\clearpage
 }
@@ -159,12 +162,18 @@
 		\vspace{0.4in}
 		\textbf{\large{\Authorname}}
 	\end{center}
+  \setlength{\parindent}{0pt} 
+  \setlength{\parskip}{0pt}
 	\Curriculumvitae
 	\clearpage
 }
 
 \newcommand{\abstractpage}
 {
+  %%%%Changes paragraph indentation to 0.5in
+  \setlength{\parindent}{0.5in} 
+  \setlength{\parskip}{0pt}
+  
 	\begin{center}
 		{\bf\Large ABSTRACT OF THE DISSERTATION} \\
 		\vspace{0.2in}
@@ -182,13 +191,12 @@
 	\end{center}
 	\vspace{0.2in}
 	\doublespacing
-	\Thesisbstract
+	\Thesisabstract
 	\clearpage
 }
 
-\renewcommand{\contentsname}{\protect\centering\protect\Large TABLE OF CONTENTS}
-\renewcommand{\listfigurename}{\protect\centering\protect\Large LIST OF FIGURES}
-\renewcommand{\listtablename}{\protect\centering\protect\Large LIST OF TABLES}
+%\renewcommand{\listfigurename}{\protect\centering\protect\Large LIST OF FIGURES}
+%\renewcommand{\listtablename}{\protect\centering\protect\Large LIST OF TABLES}
 
 % Add "Page" as column title to Table of Contents, List of Figures,
 % List of Tables, and List of Algorithms
@@ -199,8 +207,12 @@
 
 \newcommand{\preliminarypages}
 {
-	\pagenumbering{roman}
+  \pagenumbering{gobble}% Remove page numbers (and reset to 1), see http://tex.stackexchange.com/questions/54333/no-page-numbering
+	\clearpage
+	\thispagestyle{empty}
 	\thesistitlepage
+	\clearpage
+	\pagenumbering{roman}
         \ifx\Prepublishedcopyrightdeclaration\undefined
 	  \copyrightpage
 	\else
@@ -212,15 +224,17 @@
 	\else
 	  \dedicationpage
 	\fi
-	\tableofcontents
+  \tableofcontents
 	\clearpage
-	\phantomsection
-	\addcontentsline{toc}{chapter}{LIST OF FIGURES}
-	\listoffigures
-	\clearpage
-	\phantomsection
-	\addcontentsline{toc}{chapter}{LIST OF TABLES}
-	\listoftables
+	\iffalse
+		\phantomsection
+		\addcontentsline{toc}{chapter}{LIST OF FIGURES}
+		\listoffigures
+		\clearpage
+		\phantomsection
+		\addcontentsline{toc}{chapter}{LIST OF TABLES}
+		\listoftables
+	\fi
 	\ifx\listalgorithmname\undefined  % for algorithm package
 	\else
 	  \clearpage
@@ -240,6 +254,8 @@
 	\phantomsection
 	\addcontentsline{toc}{chapter}{ABSTRACT OF THE DISSERTATION}
 	\abstractpage
+	\clearpage
+	\setcounter{page}{1}
 	\pagenumbering{arabic}
 }
 

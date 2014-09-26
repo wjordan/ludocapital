@@ -1,0 +1,58 @@
+% Include, at minimum, a listing of your degrees and educational
+% achievements with dates and the school where the degrees were
+% earned. This should include the degree currently being
+% attained.
+
+\textbf{EDUCATION}
+
+\newcommand{\newdegree}[4]{
+	\begin{tabularx}{\textwidth}{@{}lXr@{}}
+		{#1} & &\textbf{#2} \\
+		{#3} & &\emph{#4}
+	\end{tabularx}
+}
+
+\newdegree{Doctor of Philosophy in Comparative Literature}{2014}{University of California, Irvine}{Irvine, CA}
+
+\newdegree{Master of Arts in Comparative Literature}{2008}{University of California, Irvine}{Irvine, CA}
+
+\newdegree{Bachelor of Science in Computer Science \& Literature}{2005}{Yale University}{New Haven, CT}
+
+\textbf{WORK EXPERIENCE}
+
+\newcommand{\newwork}[4]{
+  \begin{tabularx}{\textwidth}{@{}Xr@{}}
+    {#1} & \textbf{#2} \\
+   % \vspace{6pt}
+    {#3} & \emph{#4}
+  \end{tabularx}
+}
+
+\newwork{Software Engineer}{2014--}{Code.org}{San Francisco, CA}
+\newwork{Software Engineer}{2010--2012}{ZipZapPlay/PopCap Games}{San Francisco, CA}
+\newwork{Software Engineer}{2007--2010}{Javaground}{Irvine, CA}
+
+\textbf{TEACHING EXPERIENCE}
+
+\newcommand{\newteach}[4]{
+  \begin{tabularx}{\textwidth}{@{}Xr@{}}
+    {#1} & \textbf{#2} \\
+    {#3} & \emph{#4}
+  \end{tabularx}
+}
+
+\newteach{Instructor, Critical Reading \& Rhetoric}{2006--2007}{University of California, Irvine}{Irvine, CA}
+
+\newcommand{\mypubentry}[3]{
+	\begin{tabularx}{\textwidth}{@{}lXr@{}}
+		\multirow{2}{.7\textwidth}{#1} && \textbf{#2} \\ 
+		&& #3
+    \vspace{6pt}
+	\end{tabularx}
+}
+
+\textbf{CONFERENCE PAPERS}
+
+\mypubentry{Evolution of the Tetromino-Stacking Game: An Historical Design Study of Tetris}{Sept. 2009}{DiGRA 2009}
+  \mypubentry{From Rule-Breaking to ROM-Hacking: Theorizing the Computer Game-As-Commodity}{Sept. 2007}{DiGRA 2007}
+\vspace{12pt}

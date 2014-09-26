@@ -1,51 +1,13 @@
-uci-thesis-latex
-================
+# Ludocapital: The Political Economy of Digital Play
 
-### A LaTeX template for thesis and dissertation documents at UC Irvine.
+Will Jordan, University of California, Irvine, department of Comparative Literature
 
-Adapted from a blog post here:
+September 2014
 
-- http://vocaro.com/trevor/blog/2008/01/08/a-latex-template-for-uci-dissertations/
+This repository contains the LaTeX code used to generate the final dissertation manuscript PDF.
 
-Credit goes to Trevor, author of the site above, and those students
-who he inherited the template from (see the change log in the cls
-file).
+####Abstract:
 
-However, it seems the site above isn't actively maintained anymore, so
-I reorganized and updated things a bit to comply (to the best of my
-knowledge) with the latest UCI Theses and Dissertation Manual for
-electronic filing as of Fall 2013:
+This dissertation is a contribution to a theory of ludocapitalism, understood as the incorporation of the concept of game-playing into capitalism in contemporary technoculture. The term is derived from the Latin word *ludus**, meaning **game** or **play**. By this compound term, I mean to describe a hybrid or transitional moment of capitalism that describes its processes of commodity production and capital accumulation through reference to play as a central concept of human activity and social organization, superseding the concept of work as the locus of rationality in traditional capitalist labor formations. Through a (post)humanistic study of the discourses and practices of software and game development viewed as paradigmatic instantiations of conditions of ludocapitalism, I develop an approach to engage these practices in ethical-political discourse derived from the critical theory tradition.
 
-- http://special.lib.uci.edu/dissertations/electronic/tdmanuale.html
-
-#### Download
-
-The template homepage is:
-- https://github.com/lotten/uci-thesis-latex
-
-A zip archive of the latest version is available directly at:
-- https://github.com/lotten/uci-thesis-latex/archive/master.zip
-
-#### Usage
-
-The main file is `thesis.tex`, from which a number of other files are
-included. Take a look at the comments in the LaTeX sources for some
-more specific pointers.
-
-To compile, simply run `thesis.tex` through your LaTeX executable of
-choice. I've tested with `latex`+`dvipdf` on Linux, but `pdflatex` and
-others should work equally well. An optional, simple makefile to
-automate some of the steps is also included (adapted from Trevor,
-customize to suit your needs).
-
-#### Disclaimer
-
-Even though UCI Special Collections and Archives has referred students
-to this template, it is _not officially maintained by UCI_ and provided
-here _without any guarantees whatsoever_.
-
-That being said, I believe it can be genuinely useful to future grad
-students and I'll try my best to maintain it going forward. So if you
-find anything that is at odds with UCI requirements, now or in the
-future, or have other suggestions feel free to submit a pull request
-on GitHub or contact me directly (lotten _at_ uci _dot_ edu).
+In this dissertation, I relate this dialectic of play to classical discourses of modernity in order to draw comparisons, contrasts and historical transitions from the liberal human subject of the Enlightenment to a technoliberal, posthuman subject prompted by the computerization of society and the expansion of digital play. A central question of this dissertation is whether and in what modified form traditional discourses of critical theory can maintain relevance in this techno-ludic context. Through an analysis of the ambiguity of play and creativity in discourses of game design and software development, and as a complement to textual and rhetorical theories of digital media, I advance a critical approach to digital game and software studies, attentive to the ambivalent potential of specific technical-social platforms upon which these new forms of media are constructed, with an aim to advance and reconfigure the conditions of ludocapitalist society toward better sustaining our collective forms of life.

@@ -9,84 +9,197 @@
 % Notes: Add short title to figures, sections, via square brackets,
 % e.g. \section[short]{long}.
 %
-\documentclass[12pt,fleqn]{ucithesis}
+\documentclass[12pt]{ucithesis}
+\usepackage{color}
 
-% A few common packages
-\usepackage{amsmath}
-\usepackage{amsthm}
-\usepackage{array}
-\usepackage{graphicx}
-\usepackage{natbib}
-\usepackage{relsize}
+\usepackage{fontspec}
+\setmainfont[BoldFont={Lato Bold},Mapping=tex-text,Numbers=Lining,Scale=1.2,Contextuals=NoAlternate]{EB Garamond}
+\usepackage[defaultsans]{lato}
+\setsansfont[Ligatures=TeX,Scale=MatchLowercase]{Lato}
 
-% Some other useful packages
-\usepackage{caption}
-\usepackage{subcaption}  % \begin{subfigure}...\end{subfigure} within figure
-\usepackage{multirow}
 \usepackage{tabularx}
+\usepackage{multirow} 
+%\usepackage{microtype}
 
-% plainpages=false fixes the "duplicate ignored" error with page counters
-% Set pdfborder to 0 0 0 to disable colored borders around PDF hyperlinks
-\usepackage[plainpages=false,pdfborder={0 0 0}]{hyperref}
-
-% Uncomment the following two lines to use the algorithm package,
-% which provides an algorithm environment similar to figure and table
-% ("\begin{algorithm}...\end{algorithm}"). A list of algorithms will
-% automatically be added in the preliminary pages. Note that you
-% probably want a package for the actual code to go with this (e.g.,
-% algorithmic).
-%\usepackage{algorithm}
-%\renewcommand{\listalgorithmname}{\protect\centering\protect\Large LIST OF ALGORITHMS}
-
-% Uncomment the following line to enable Unicode support. This will allow you
-% to enter non-ASCII characters (such as accented characters) directly without
-% having to use LaTeX's awkward escape syntax (e.g., \'{e})
-% NOTE: You may have to install the ucs.sty package for this to work. See:
-% http://www.unruh.de/DniQ/latex/unicode/
-%\usepackage[utf8x]{inputenc}
+% Initialize MLA bibliographic style.
+\usepackage[american]{babel} 
+% Quoting support. 4 line threshold for block quotes is MLA standard.
+\usepackage[threshold=3]{csquotes}
+\usepackage[style=mla,mancitepar=false,backend=biber]{biblatex}
+\addbibresource{thesis.bib}
 
 % Uncomment the following to avoid "widowing", where page breaks cause
 % single lines of paragraphs to float onto the next page (this is not
 % a UCI requirement but more of an aesthetic choice).
-%\widowpenalty=10000
-%\clubpenalty=10000
+\widowpenalty10000
+\clubpenalty10000
 
-% Modify or extend these at will.
-\newtheorem{theorem}{\textsc{Theorem}}[chapter]
-\newtheorem{definition}{\textsc{Definition}}[chapter]
-\newtheorem{example}{\textsc{Example}}[chapter]
+% Add emphasis to |text| like this.
+\catcode`\|=\active
+%\catcode`\*=\active
+\def|#1|{\textins{#1}}
+%\def*#1*{\emph{#1}}
+
+% Add ellipses with unicode …
+\catcode`…=\active
+\def …{\dots}
+
+% Use \citeauthor{ref} to trigger ibid processing for future citations
+\let\oldciteauthor\citeauthor
+\renewcommand{\citeauthor}[1]{%
+  \notecite{#1}%
+  \oldciteauthor{#1}%
+}
+
+% MLA formatting of punctuation within text quotes:
+% Punctuation belongs within quotes without citation,
+% or after the citation if one is present.
+\renewcommand{\mktextquote}[6]{
+  \ifx&#6&%
+  #1#2#4#5#3#6
+  \else
+  #1#2#3#6#4#5
+  \fi
+}
+
+\long\def\epigram#1{
+  \emph{\begin{quoting}#1\end{quoting}}
+}
+
+% Use >angle brackets like >this< for nested quoting.<
+% Or you can use "standard MLA outer/inner 'quoting' like this."
+\MakeOuterQuote{"}
+\MakeOuterQuote{”}
+\MakeOuterQuote{“}
+\MakeAutoQuote{>}{<}
+\SetCiteCommand{\autocite}
+
+% Special setup for block quoting
+\RequirePackage{relsize}
+\usepackage[vskip=10pt,font={onehalfspacing,small}]{quoting}
+\SetBlockEnvironment{quoting}
+
+\usepackage{etoolbox}
+\appto\quoting{\setlength{\RaggedRightParindent}{0.25in} \RaggedRight}
+\AtBeginEnvironment{quoting}{\setlength{\parindent}{0.25in}}
 
 % Macros for title, author, abstract, etc.
 \input{preliminaries}
 
-% Add PDF document info fields
-\hypersetup{
-	pdftitle={\Thesistitle},
-	pdfauthor={\Authorname},
-	pdfsubject={\Degreefield},
+\defbibheading{bibliography}{%
+  \chapter*{WORKS CITED}
 }
+
+\usepackage[explicit]{titlesec}
+\titleformat{name=\paragraph,numberless}[runin]
+{\normalfont\normalsize\bfseries}{}{0pt}{#1}
 
 % Uncomment the following to have numbered subsubsections (by default
 % numbering goes only to subsections).
 %\setcounter{secnumdepth}{4}
 
+% Very light hyphenation with ragged right
+\usepackage{ragged2e}
+\setlength{\RaggedRightParindent}{\parindent}
+\setlength\RaggedRightRightskip{0pt plus 2in minus 1pt} % default is: 0pt plus 2em
+% Add ragged right to footnotes
+\let\Footnote\footnote 
+\renewcommand\footnote[1]{{\RaggedRight\Footnote{\setstretch{1.15}#1}}}
 
-% Set this to only select a subset of the includes directives below.
-% Very handy to speed up compilation if you're working on a certain
-% part of your thesis. It conserves page numbers, references, etc.
-% even for non-included files.
-%\includeonly{chapter1}
+% the penalty for breaking a page after a line within a paragraph
+\linepenalty=20
+% the penalty for line breaking at an explicit hyphen
+\exhyphenpenalty=50
+% the penalty for line breaking at an automatically inserted hyphen
+\hyphenpenalty=500
+% extra penalty for page breaking after a hyphenated line
+\brokenpenalty=1000
+
+% plainpages=false fixes the "duplicate ignored" error with page counters
+% Set pdfborder to 0 0 0 to disable colored borders around PDF hyperlinks
+\usepackage[plainpages=false,pdfborder={0 0 0}]{hyperref}
+
+% Make autoref links "Chapter 1" instead of "chapter 1"
+\usepackage[capitalize,nameinlink]{cleveref}
+
+% Add PDF document info fields
+\hypersetup{
+  pdftitle={\Thesistitle},
+  pdfauthor={\Authorname},
+  pdfsubject={\Degreefield},
+}
+
+% Add hyperlink to \citetitle references
+\DeclareCiteCommand{\citetitle}
+{\boolfalse{citetracker}%
+  \boolfalse{pagetracker}%
+  \usebibmacro{prenote}}
+{\ifciteindex
+  {\indexfield{indextitle}}
+  {}%
+  \printtext[bibhyperref]{\printfield[citetitle]{labeltitle}}}
+{\multicitedelim}
+{\usebibmacro{postnote}}
+
+% Use \citetitle{ref} to trigger ibid processing for future citations
+\let\oldcitetitle\citetitle
+\renewcommand{\citetitle}[1]{%
+  \notecite{#1}%
+  \oldcitetitle{#1}%
+}
+
+% MLA: For an ellipsis within a sentence, use three periods with a space
+% before each and a space after the last
+\usepackage[chicago,xspace]{ellipsis}
+\ellipsis@alwayscentertrue
+\renewcommand{\ellipsis@before}{\kern\ellipsisgap}
+\xspaceaddexceptions{'<"}
+
+\usepackage{sectsty}
+\allsectionsfont{\normalfont\sffamily\bfseries}
+\chapterfont{\centering}
+
+\usepackage{tocloft}
+\renewcommand\cftsecfont{\normalfont}
+\renewcommand\cftsecpagefont{\normalfont}
+\renewcommand\cftchapfont{\normalfont}
+\renewcommand\cftchappagefont{\normalfont}
+%\renewcommand{\cftsecleader}{\cftdotfill{\cftsecdotsep}}
+%\renewcommand\cftsecdotsep{.}
+%\renewcommand\cftsubsecdotsep{.}
+
+\addto\captionsnamerican{\renewcommand{\bibname}{WORKS CITED}}
 
 \begin{document}
+\renewcommand{\contentsname}{TABLE OF CONTENTS}
+  \makeatletter
+  \renewcommand{\tableofcontents}{%
+    \begin{center}
+      \vspace*{-7mm}% reduce space before
+      \noindent{\bf\Large\contentsname\par}%
+      \vspace{0.4in}% space between title and rule
+      \@starttoc{toc}
+    \end{center}}
+  \makeatother  
+
+\setlength{\footnotesep}{14pt}
 
 % Preliminary pages are always loaded (TOC, CV, etc.)
+\RaggedRight
 \preliminarypages
+\RaggedRight
+
+%%%%Changes paragraph indentation to 0.5in
+\setlength{\parindent}{0.5in} 
+\setlength{\parskip}{0pt}
 
 % Include the different components of your thesis, in separate files.
 % Using \include allows you to set \includeonly above.
+\include{introduction}
 \include{chapter1}
-%\include{chapter2}
-% ... and so on
+\include{chapter2}
+\include{chapter3}
+\include{chapter4}
 
 % These commands fix an odd problem in which the bibliography line
 % of the Table of Contents shows the wrong page number.
@@ -94,18 +207,13 @@
 \phantomsection
 
 % "References should be formatted in style most common in discipline",
-% abbrv is only a suggestion.
-\bibliographystyle{abbrv}
-\bibliography{thesis}
+\addcontentsline{toc}{chapter}{WORKS CITED}
+\newenvironment{bib}{\setstretch{1.1}}
 
-% The Thesis Manual says not to include appendix figures and tables in
-% the List of Figures and Tables, respectively, so these commands from
-% the caption package turn it off from this point onwards. If needed,
-% it can be re-enabled later (using list=yes argument).
-\captionsetup[figure]{list=no}
-\captionsetup[table]{list=no}
-
-% If you have an appendix, it should come after the references.
-\include{appendix}
+  \begin{bib}
+    \setlength{\bibitemsep}{\baselineskip}
+    \setlength{\bibhang}{0.5in}
+    \printbibliography
+  \end{bib}
 
 \end{document}
