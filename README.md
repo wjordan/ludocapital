@@ -4,7 +4,7 @@ Will Jordan, University of California, Irvine, department of Comparative Literat
 
 September 2014
 
-This repository contains the LaTeX code used to generate the final dissertation manuscript PDF.
+This repository contains the LaTeX code used to generate the final dissertation manuscript [PDF](https://github.com/wjordan/ludocapital/raw/master/Ludocapital%20-%20The%20Political%20Economy%20of%20Digital%20Play.pdf).
 
 ####Abstract:
 
